@@ -1,32 +1,85 @@
-# KineticMe
+<div align="center">
+  <img src="public/icons.svg" alt="KineticMe Logo" width="100" height="100" />
+  <h1>🚀 KineticMe</h1>
+  <p>A modern, highly interactive personal fitness dashboard built for the web.</p>
+  
+  <p>
+    <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+    <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E" alt="Vite" />
+  </p>
+</div>
 
-This is a modern personal fitness dashboard application.
+<br />
 
-Currently, two official plugins are available:
+## ✨ Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**KineticMe** is a premium, beautifully crafted personal fitness dashboard designed to track your daily health metrics, activities, and wellness goals. With its sleek dark mode UI, micro-animations, and dynamic data visualization, it provides an unparalleled experience for staying on top of your fitness journey.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🎯 Key Features
 
-## Expanding the Oxlint configuration
+- 📊 **Dynamic Dashboard:** Track your daily activity through an interactive GitHub-style heatmap.
+- 📈 **Data Visualizations:** Beautiful charts for tracking pain volume progression and weight fluctuations over time using `recharts`.
+- 🤖 **AI Coaching:** Get personalized nutrition and workout advice powered by NVIDIA's advanced LLMs.
+- ⏱️ **Time Filtering:** Seamlessly switch your data views between week, month, and year contexts.
+- 🎨 **Premium Aesthetics:** A sleek, fully responsive dark mode interface crafted with glassmorphism and smooth `framer-motion` animations.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+---
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+## 🛠️ Technology Stack
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+- **Frontend Framework:** [React 19](https://react.dev/) + [Vite](https://vitejs.dev/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Visualizations:** [Recharts](https://recharts.org/)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+
+---
+
+## 🚀 Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine.
+
+### Prerequisites
+
+Ensure you have Node.js (version 18 or higher) installed on your system.
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/vibek01/kinetic-me.git
+   cd kinetic-me
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment Variables:**
+   Create a `.env` file in the root directory and add your NVIDIA API key for the AI Coach:
+   ```env
+   VITE_NVIDIA_API_KEY="your_nvidia_api_key_here"
+   ```
+
+4. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+5. Open your browser and navigate to `http://localhost:5173`.
+
+---
+
+## 📜 License
+
+This project is open-source and available for personal use. Feel free to fork and customize it for your own fitness tracking needs!
+
+<br />
+
+<div align="center">
+  <i>Built with ❤️ for a healthier tomorrow.</i>
+</div>
