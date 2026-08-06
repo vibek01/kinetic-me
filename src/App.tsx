@@ -17,6 +17,8 @@ import ActivityHeatMap from './components/dashboard/ActivityHeatMap';
 import WorkoutsView from './components/views/WorkoutsView';
 import NutritionView from './components/views/NutritionView';
 import AICoachView from './components/views/AICoachView';
+import BodyMetricsView from './components/views/BodyMetricsView';
+import PainTrackerView from './components/views/PainTrackerView';
 
 // Main application component
 function App() {
@@ -50,6 +52,8 @@ function App() {
     switch(activeTab) {
       case 'workouts': return <WorkoutsView key="workouts" />;
       case 'nutrition': return <NutritionView key="nutrition" />;
+      case 'metrics': return <BodyMetricsView key="metrics" />;
+      case 'pain': return <PainTrackerView key="pain" />;
       case 'aicoach': return <AICoachView key="aicoach" />;
       default: return (
         <motion.div 
