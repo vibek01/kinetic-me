@@ -11,10 +11,10 @@ const NutritionView = () => {
   ]);
 
   const [meals, setMeals] = useState([
-    { time: '6:15 AM', name: 'Pre-workout', items: '1 medium banana', cals: 105 },
-    { time: '7:30 AM', name: 'Breakfast', items: '250ml milk, 3 boiled eggs, 2 rotis', cals: 480 },
-    { time: '10:30 AM', name: 'Mid-morning', items: '1 apple', cals: 95 },
-    { time: '2:00 PM', name: 'Lunch', items: '200g rice, 150g dal, 120g chicken', cals: 650 },
+    { time: '6:15 AM', name: 'Pre-workout', items: '1 medium banana', cals: 105, isAi: false },
+    { time: '7:30 AM', name: 'Breakfast', items: '250ml milk, 3 boiled eggs, 2 rotis', cals: 480, isAi: false },
+    { time: '10:30 AM', name: 'Mid-morning', items: '1 apple', cals: 95, isAi: false },
+    { time: '2:00 PM', name: 'Lunch', items: '200g rice, 150g dal, 120g chicken', cals: 650, isAi: false },
   ]);
 
   const [inputText, setInputText] = useState('');
@@ -30,18 +30,27 @@ const NutritionView = () => {
         model: "nvidia/nemotron-3-ultra-550b-a55b",
         messages: [{
           role: "user",
-          content: `You are a highly accurate nutritional API. Calculate the macros for this Indian diet input: '${inputText}'. Return ONLY a valid JSON object with the keys: calories (number), protein (number), carbs (number), fats (number). Do not include any other text or markdown formatting.`
+          content: `You are a highly accurate nutritional API. Calculate the macros for this Indian diet input: '${inputText}'. 
+IMPORTANT RULE: 100g of cooked rice is exactly 110 kcal. Adjust calculations accordingly.
+Return ONLY a valid JSON object with the keys: 
+- mealType (string: Extract the specific meal name if the user mentions it like 'Dinner', 'Breakfast', 'Snack', etc. Capitalize the first letter. If not explicitly mentioned, infer it intelligently based on the food items.)
+- calories (number)
+- protein (number)
+- carbs (number)
+- fats (number)
+Do not include any other text or markdown formatting.`
         }],
-        temperature: 0.1,
+        temperature: 1,
         top_p: 0.95,
         max_tokens: 16384,
+        chat_template_kwargs: { enable_thinking: true },
+        reasoning_budget: 16384
       };
 
-      const res = await fetch("https://integrate.api.nvidia.com/v1/chat/completions", {
+      const res = await fetch("/api/nvidia/chat/completions", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${import.meta.env.VITE_NVIDIA_API_KEY || 'YOUR_NVIDIA_API_KEY'}`
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(payload)
       });
@@ -69,9 +78,10 @@ const NutritionView = () => {
         
         setMeals(prev => [...prev, {
           time: timeStr,
-          name: 'Smart Logged Meal',
+          name: parsed.mealType || 'Smart Logged Meal',
           items: inputText,
-          cals: parsed.calories
+          cals: parsed.calories,
+          isAi: true
         }]);
 
         setInputText('');
@@ -177,7 +187,10 @@ const NutritionView = () => {
               <div className="meal-time">{meal.time}</div>
               <div className="meal-content">
                 <div className="meal-header">
-                  <span className="meal-name">{meal.name}</span>
+                  <span className="meal-name">
+                    {meal.name}
+                    {meal.isAi && <span className="ai-pill">AI Evaluated</span>}
+                  </span>
                   <span className="meal-cals">{meal.cals} kcal</span>
                 </div>
                 <div className="meal-desc">{meal.items}</div>
