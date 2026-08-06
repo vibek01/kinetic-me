@@ -1,5 +1,5 @@
 import React from 'react';
-import { Activity, LayoutDashboard, Dumbbell, Utensils, BrainCircuit } from 'lucide-react';
+import { Activity, LayoutDashboard, Dumbbell, Utensils, BrainCircuit, Ruler } from 'lucide-react';
 
 interface SidebarProps {
   activeTab: string;
@@ -38,6 +38,22 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
         >
           <Utensils size={20} />
           <span>Nutrition</span>
+        </button>
+        <button 
+          className={`nav-item ${activeTab === 'metrics' ? 'active' : ''}`}
+          onClick={() => setActiveTab('metrics')}
+          style={{ width: '100%', border: 'none', background: 'transparent', textAlign: 'left', font: 'inherit' }}
+        >
+          <Ruler size={20} />
+          <span>Body Metrics</span>
+        </button>
+        <button 
+          className={`nav-item ${activeTab === 'pain' ? 'active' : ''}`}
+          onClick={() => setActiveTab('pain')}
+          style={{ width: '100%', border: 'none', background: 'transparent', textAlign: 'left', font: 'inherit' }}
+        >
+          <Activity size={20} />
+          <span>Pain Tracker</span>
         </button>
         <button 
           className={`nav-item ${activeTab === 'aicoach' ? 'active' : ''}`}
